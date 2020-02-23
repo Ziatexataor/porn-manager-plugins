@@ -14,12 +14,13 @@ async ({
   if (event != "movieCreated")
     $throw("Uh oh. You shouldn't use the plugin for this type of event");
 
+  const name = movieName.replace(/#/g, "").replace(/\s{2,}/g, " ").trim();
   $log(
-    `Scraping movie covers for '${movieName}', dry mode: ${args.dry ||
+    `Scraping movie covers for '${name}', dry mode: ${args.dry ||
       false}...`
   );
 
-  const url = `https://www.adultempire.com/allsearch/search?q=${movieName}`;
+  const url = `https://www.adultempire.com/allsearch/search?q=${name}`;
   const html = (await $axios.get(url)).data;
   const $ = $cheerio.load(html);
 
