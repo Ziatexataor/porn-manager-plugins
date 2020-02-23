@@ -1,5 +1,5 @@
 async ({ event, args, $axios, $moment, $cheerio, $throw, $log, actorName }) => {
-  if (event != "actorCreated")
+  if (event != "actorCreated" && event != "actorCustom")
     $throw("Uh oh. You shouldn't use the plugin for this type of event");
 
   $log(`Scraping freeones birth date for ${actorName}, dry mode: ${args.dry || false}...`);
