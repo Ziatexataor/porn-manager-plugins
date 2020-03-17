@@ -5,11 +5,13 @@ async ({ event, args, $axios, $moment, $cheerio, $throw, $log, actorName }) => {
   $log(`Scraping freeones birth date for ${actorName}, dry mode: ${args.dry || false}...`);
 
   const url = `https://freeones.xxx/${actorName.replace(/ /g, "-")}/profile`;
+  $log("Getting " + url);
   const html = (await $axios.get(url)).data;
   const $ = $cheerio.load(html);
 
-  const second = $(".profile-layout-meta a").toArray()[1];
-  const href = $(second).attr("href");
+  const first = $(".profile-meta-item a").toArray()[0];
+  $log(first);
+  const href = $(first).attr("href");
 
   const yyyymmdd = href.match(/\d\d\d\d-\d\d-\d\d/);
 
