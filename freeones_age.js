@@ -10,7 +10,6 @@ async ({ event, args, $axios, $moment, $cheerio, $throw, $log, actorName }) => {
   const $ = $cheerio.load(html);
 
   const first = $(".profile-meta-item a").toArray()[0];
-  $log(first);
   const href = $(first).attr("href");
 
   const yyyymmdd = href.match(/\d\d\d\d-\d\d-\d\d/);
