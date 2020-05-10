@@ -8,7 +8,7 @@ module.exports = async ({
   movieName,
   $createImage
 }) => {
-  if (event != "movieCreated")
+  if (!movieName)
     $throw("Uh oh. You shouldn't use the plugin for this type of event");
 
   const name = movieName.replace(/#/g, "").replace(/\s{2,}/g, " ").trim();
