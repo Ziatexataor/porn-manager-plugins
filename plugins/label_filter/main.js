@@ -10,7 +10,7 @@ module.exports = ({ args, data }) => {
 
   return {
     labels: data.labels.filter((label) => {
-      const lowercased = label.toLowerCase();
+      const lowercased = lower(label);
       if (whitelist.length && !whitelist.includes(label)) return false;
       return blacklist.every((blacklisted) => blacklisted != lowercased);
     }),
