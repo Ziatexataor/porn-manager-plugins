@@ -32,7 +32,7 @@ module.exports = async ({
       true
     );
     return {
-      thumbnail: image,
+      [args.target || thumbnail]: image,
     };
   }
   $log(`Found no picture for ${actorName}`);
