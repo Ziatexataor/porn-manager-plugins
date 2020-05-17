@@ -7,7 +7,7 @@ const template = fs.readFileSync("template.md", "utf-8");
 
 const tableHeaders = ["Name", "Type", "Required", "Description"];
 
-const main = async () => {
+const generatePluginDocs = async () => {
   const pluginFolder = nodepath.resolve("../plugins");
   const pluginNames = fs.readdirSync(pluginFolder);
 
@@ -46,4 +46,4 @@ const main = async () => {
   });
 };
 
-main();
+generatePluginDocs();

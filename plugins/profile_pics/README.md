@@ -3,13 +3,6 @@
 by boi123212321
 
 Find actor images based on local files
-
-### Documentation
-
-This is additional documentation, which is pretty cool.
-
-It can use **md** features.
-
 ### Arguments
 
 | Name   | Type   | Required | Description                                                                         |
