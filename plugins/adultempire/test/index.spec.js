@@ -6,7 +6,7 @@ describe("adultempire", () => {
   it("Should fetch covers & studio name from page", async () => {
     let error = false;
     try {
-      console.log("Fetching website...");
+      console.log("Fetching adultempire.com...");
       const result = await plugin({
         ...context,
         movieName: "tushy raw v5",

@@ -5,7 +5,10 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.19.2",
-    "cheerio": "^1.0.0-rc.3"
+    "cheerio": "^1.0.0-rc.3",
+    "inquirer": "^7.1.0",
+    "moment": "^2.25.3",
+    "ora": "^4.0.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
