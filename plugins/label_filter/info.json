@@ -1,0 +1,21 @@
+{
+  "name": "label_filter",
+  "version": "0.0.1",
+  "authors": ["boi123212321"],
+  "description": "Filter labels returned by other plugins",
+  "arguments": [
+    {
+      "name": "whitelist",
+      "type": "Array<String>",
+      "required": false,
+      "description": "Labels to include"
+    },
+    {
+      "name": "blacklist",
+      "type": "Array<String>",
+      "required": false,
+      "default": "thumbnail",
+      "description": "Labels to exclude"
+    }
+  ]
+}
