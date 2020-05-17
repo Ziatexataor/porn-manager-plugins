@@ -1,6 +1,5 @@
 module.exports = async ({
   $createImage,
-  event,
   args,
   $axios,
   $moment,

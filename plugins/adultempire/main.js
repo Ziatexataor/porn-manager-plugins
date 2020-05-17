@@ -1,20 +1,21 @@
 module.exports = async ({
   args,
-  event,
   $axios,
   $cheerio,
   $throw,
   $log,
   movieName,
-  $createImage
+  $createImage,
 }) => {
   if (!movieName)
     $throw("Uh oh. You shouldn't use the plugin for this type of event");
 
-  const name = movieName.replace(/#/g, "").replace(/\s{2,}/g, " ").trim();
+  const name = movieName
+    .replace(/#/g, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
   $log(
-    `Scraping movie covers for '${name}', dry mode: ${args.dry ||
-      false}...`
+    `Scraping movie covers for '${name}', dry mode: ${args.dry || false}...`
   );
 
   const url = `https://www.adultempire.com/allsearch/search?q=${name}`;
@@ -29,7 +30,10 @@ module.exports = async ({
     const html = (await $axios.get(movieUrl)).data;
     const $ = $cheerio.load(html);
 
-    const studioName = $(`.title-rating-section .item-info > a`).eq(0).text().trim();
+    const studioName = $(`.title-rating-section .item-info > a`)
+      .eq(0)
+      .text()
+      .trim();
     $log("Studio = " + studioName);
 
     const frontCover = $("#front-cover img").toArray()[0];
@@ -41,7 +45,7 @@ module.exports = async ({
         movieUrl,
         frontCoverSrc,
         backCoverSrc,
-        studioName
+        studioName,
       });
     } else {
       const frontCoverImg = await $createImage(
@@ -56,7 +60,7 @@ module.exports = async ({
       return {
         frontCover: frontCoverImg,
         backCover: backCoverImg,
-        studio: studioName
+        studio: studioName,
       };
     }
   }

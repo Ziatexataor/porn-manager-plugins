@@ -1,8 +1,20 @@
-module.exports = async ({ event, args, $axios, $moment, $cheerio, $throw, $log, actorName }) => {
+module.exports = async ({
+  args,
+  $axios,
+  $moment,
+  $cheerio,
+  $throw,
+  $log,
+  actorName,
+}) => {
   if (!actorName)
     $throw("Uh oh. You shouldn't use the plugin for this type of event");
 
-  $log(`Scraping freeones birth date for ${actorName}, dry mode: ${args.dry || false}...`);
+  $log(
+    `Scraping freeones birth date for ${actorName}, dry mode: ${
+      args.dry || false
+    }...`
+  );
 
   const url = `https://freeones.xxx/${actorName.replace(/ /g, "-")}/profile`;
   $log("Getting " + url);
@@ -24,7 +36,7 @@ module.exports = async ({ event, args, $axios, $moment, $cheerio, $throw, $log, 
       return {};
     }
     return {
-      bornOn: timestamp
+      bornOn: timestamp,
     };
   } else {
     $throw("Could not find actor birth date.");

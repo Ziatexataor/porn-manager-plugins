@@ -1,6 +1,5 @@
 module.exports = async ({
   args,
-  event,
   $throw,
   $log,
   actorName,
