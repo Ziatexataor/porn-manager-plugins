@@ -15,6 +15,7 @@
     "mocha": "^7.1.2"
   },
   "scripts": {
+    "check-info": "node check_info.js",
     "test": "mocha plugins/**/*.spec.js --timeout 10000"
   },
   "repository": {
