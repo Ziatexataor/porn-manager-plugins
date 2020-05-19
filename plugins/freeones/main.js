@@ -17,6 +17,14 @@ module.exports = async ({
 
   const blacklist = args.blacklist || [];
   if (!args.blacklist) $log("No blacklist defined, returning everything...");
+  
+  //Check metric preference
+  const metricpref = args.prefer_metric;
+  if (!metricpref) {
+	  $log("Metric preference not set. Using imperial values...");
+  } else {
+	  $log("Metric preference indicated. Using metric values...");
+  }
 
   const petiteThreshold = parseInt(args.petiteThreshold) || 160;
 
@@ -34,14 +42,40 @@ module.exports = async ({
     if (blacklist.includes("height")) return {};
     $log("Getting height...");
 
-    const el = $('[data-test="link_height"] .text-underline-always');
-    if (!el) return {};
+    const htsel = $('[data-test="link_height"] .text-underline-always');
+    if (!htsel || htsel.length === 0) return {};
 
-    const raw = $(el).text();
-    const cm = raw.match(/\d+cm/)[0];
-    if (!cm) return {};
+    const rawht = $(htsel).text();
+    const ht_cm = rawht.match(/\d+cm/)[0];
+	if (!ht_cm) return {};
+	let hgt = parseInt(ht_cm.replace("cm", ""));
+	if (!metricpref) {
+		hgt *= 0.033;
+		hgt = Math.round((hgt + Number.EPSILON) * 100) / 100;
+	}
+	
+	return { Height: hgt }
+	
+  }
+  
+  function getWeight() {
+    if (blacklist.includes("weight")) return {};
+    $log("Getting weight...");
 
-    return { height: parseInt(cm.replace("cm", "")) };
+    const wtsel = $('[data-test="link_weight"] .text-underline-always');
+    if (!wtsel || wtsel.length === 0) return {};
+
+    const rawwt = $(wtsel).text();
+    const wt_kg = rawwt.match(/\d+kg/)[0];
+	if (!wt_kg) return {};
+	let wgt = parseInt(wt_kg.replace("kg", ""));
+	if (!metricpref) {
+		wgt *= 2.2;
+		wgt = Math.round((wgt + Number.EPSILON) * 100) / 100;
+	}
+	
+	return { Weight: wgt }
+	
   }
 
   function scrapeText(prop, selector) {
@@ -104,6 +138,7 @@ module.exports = async ({
       '[data-test="link_ethnicity"] .text-underline-always'
     ),
     ...getHeight(),
+	...getWeight(),
   };
 
   const data = {

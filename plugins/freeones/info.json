@@ -16,7 +16,14 @@
       "type": "Array<String>",
       "required": false,
       "default": [],
-      "description": "Array of data fields to omit (possible values: 'height', 'avatar', 'bornOn', 'labels', 'hairColor', 'eyeColor', 'ethnicity')"
+      "description": "Array of data fields to omit (possible values: 'height', 'weight', 'avatar', 'bornOn', 'labels', 'hairColor', 'eyeColor', 'ethnicity')"
+    },
+	{
+      "name": "prefer_metric",
+      "type": "String",
+      "required": false,
+      "default": [],
+      "description": "Metric preference for height and weight (possible values: 'true', 'false')"
     }
   ]
 }
