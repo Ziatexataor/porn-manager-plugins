@@ -123,6 +123,19 @@ module.exports = async ({
       return {};
     }
   }
+  
+  function getAlias() {
+    if (blacklist.includes("aliases")) return {};
+    $log("Getting aliases...");
+
+    const alias_sel = $('[data-test="section-alias"] p[data-test*="p_aliases"]');
+	const alias_text = alias_sel.text();
+	const alias_name = alias_text && !/unknown/.test(alias_text) ? alias_text.trim() : null;
+	if (!alias_name) return {};
+	const alias_fin = alias_name.split(/,\s*/g);
+	
+	return { aliases: alias_fin };
+  }
 
   const custom = {
     ...scrapeText(
@@ -144,6 +157,7 @@ module.exports = async ({
   const data = {
     ...getAge(),
     ...(await getAvatar()),
+	...getAlias(),
     custom,
   };
 

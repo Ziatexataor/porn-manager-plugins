@@ -1,7 +1,7 @@
 {
   "name": "freeones",
-  "version": "0.0.1",
-  "authors": ["boi123212321"],
+  "version": "0.0.3",
+  "authors": ["boi123212321","john4valor"],
   "description": "Scrape data from freeones.xxx",
   "arguments": [
     {
@@ -16,7 +16,7 @@
       "type": "Array<String>",
       "required": false,
       "default": [],
-      "description": "Array of data fields to omit (possible values: 'height', 'weight', 'avatar', 'bornOn', 'labels', 'hairColor', 'eyeColor', 'ethnicity')"
+      "description": "Array of data fields to omit (possible values: 'aliases', 'height', 'weight', 'avatar', 'bornOn', 'labels', 'hairColor', 'eyeColor', 'ethnicity')"
     },
 	{
       "name": "prefer_metric",
