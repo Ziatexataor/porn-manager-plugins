@@ -1,4 +1,4 @@
-## freeones 0.0.1
+## freeones 0.1.0
 
 by boi123212321
 

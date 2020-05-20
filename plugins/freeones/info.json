@@ -1,6 +1,6 @@
 {
   "name": "freeones",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "authors": ["boi123212321"],
   "description": "Scrape data from freeones.xxx",
   "arguments": [

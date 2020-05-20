@@ -18,7 +18,7 @@ module.exports = async ({
   const blacklist = args.blacklist || [];
   if (!args.blacklist) $log("No blacklist defined, returning everything...");
 
-  const petiteThreshold = parseInt(args.petiteThreshold) || 160;
+  /* const petiteThreshold = parseInt(args.petiteThreshold) || 160; */
 
   const url = `https://freeones.xxx/${actorName.replace(/ /g, "-")}/profile`;
   let html;
@@ -117,8 +117,8 @@ module.exports = async ({
     if (custom.hairColor) data.labels.push(`${custom.hairColor} Hair`);
     if (custom.eyeColor) data.labels.push(`${custom.eyeColor} Eyes`);
     if (custom.ethnicity) data.labels.push(custom.ethnicity);
-    if (custom.height && custom.height <= petiteThreshold)
-      data.labels.push("Petite");
+    /* if (custom.height && custom.height <= petiteThreshold)
+      data.labels.push("Petite"); */
   }
 
   if (args.dry === true) {
