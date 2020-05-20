@@ -20,6 +20,7 @@ describe("freeones", () => {
       ethnicity: "Caucasian",
       height: 168,
     });
+    expect(result.nationality).to.equal("US");
     expect(result.bornOn).to.be.a("number");
     expect(result.avatar).to.be.a("string");
     expect(result.labels).to.have.length.greaterThan(0);
@@ -38,6 +39,7 @@ describe("freeones", () => {
       ethnicity: "Caucasian",
       height: 168,
     });
+    expect(result.nationality).to.equal("US");
     expect(result.bornOn).to.be.a("number");
     expect(result.avatar).to.be.a("string");
     expect(result.labels).to.have.length.greaterThan(0);
@@ -55,6 +57,7 @@ describe("freeones", () => {
       ethnicity: "Caucasian",
       height: 168,
     });
+    expect(result.nationality).to.equal("US");
     expect(result.bornOn).to.be.a("number");
     expect(result.avatar).to.be.a("string");
     expect(result.labels).to.have.length.greaterThan(0);
@@ -72,6 +75,7 @@ describe("freeones", () => {
       eyeColor: "Hazel",
       height: 168,
     });
+    expect(result.nationality).to.equal("US");
     expect(result.bornOn).to.be.a("number");
     expect(result.avatar).to.be.a("string");
     expect(result.labels).to.have.length.greaterThan(0);
@@ -89,6 +93,7 @@ describe("freeones", () => {
       eyeColor: "Hazel",
       ethnicity: "Caucasian",
     });
+    expect(result.nationality).to.equal("US");
     expect(result.bornOn).to.be.a("number");
     expect(result.avatar).to.be.a("string");
     expect(result.labels).to.have.length.greaterThan(0);
@@ -108,6 +113,7 @@ describe("freeones", () => {
       ethnicity: "Caucasian",
       height: 168,
     });
+    expect(result.nationality).to.equal("US");
     expect(result.bornOn).to.be.a("number");
     expect(result.avatar).to.be.undefined;
     expect(result.labels).to.have.length.greaterThan(0);
@@ -127,8 +133,29 @@ describe("freeones", () => {
       ethnicity: "Caucasian",
       height: 168,
     });
+    expect(result.nationality).to.equal("US");
     expect(result.bornOn).to.be.a("number");
     expect(result.avatar).to.be.a("string");
     expect(result.labels).to.be.undefined;
+  });
+
+  it("Search 'Whitney Wright', but without nationality", async () => {
+    console.log("Fetching freeones.xxx...");
+    const result = await searchWhitney({
+      blacklist: ["nationality"],
+    });
+    expect(result.custom).to.deep.equal({
+      hairColor: "Brown",
+      eyeColor: "Hazel",
+      ethnicity: "Caucasian",
+      height: 168,
+    });
+    expect(result.nationality).to.be.undefined;
+    expect(result.bornOn).to.be.a("number");
+    expect(result.avatar).to.be.a("string");
+    expect(result.labels).to.have.length.greaterThan(0);
+    expect(result.labels).to.contain("Brown Hair");
+    expect(result.labels).to.contain("Hazel Eyes");
+    expect(result.labels).to.contain("Caucasian");
   });
 });

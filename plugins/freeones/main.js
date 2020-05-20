@@ -30,6 +30,28 @@ module.exports = async ({
 
   const $ = $cheerio.load(html);
 
+  function getNationality() {
+    if (blacklist.includes("nationality")) return {};
+    $log("Getting nationality...");
+
+    const elements = $(
+      '[data-test="section-personal-information"] a[href*="countryCode%5D"]'
+    );
+
+    if (!elements.length) {
+      $log("Nationality not found");
+      return {};
+    }
+
+    const nationality = $(elements).attr("href").split("=").slice(-1)[0];
+    if (!nationality) {
+      return {};
+    }
+    return {
+      nationality,
+    };
+  }
+
   function getHeight() {
     if (blacklist.includes("height")) return {};
     $log("Getting height...");
@@ -107,6 +129,7 @@ module.exports = async ({
   };
 
   const data = {
+    ...getNationality(),
     ...getAge(),
     ...(await getAvatar()),
     custom,
