@@ -42,16 +42,16 @@ module.exports = async ({
     if (blacklist.includes("nationality")) return {};
     $log("Getting nationality...");
 
-    const elements = $(
+    const nat_sel = $(
       '[data-test="section-personal-information"] a[href*="countryCode%5D"]'
     );
 
-    if (!elements.length) {
+    if (!nat_sel.length) {
       $log("Nationality not found");
       return {};
     }
 
-    const nationality = $(elements).attr("href").split("=").slice(-1)[0];
+    const nationality = $(nat_sel).attr("href").split("=").slice(-1)[0];
     if (!nationality) {
       return {};
     }
@@ -92,6 +92,42 @@ module.exports = async ({
 	wgt *= 2.2;
 	wgt = Math.round((wgt + Number.EPSILON) * 100) / 100;
 	return { weight: wgt };
+  }
+  
+  function getZodiac() {
+    if (blacklist.includes("zodiac")) return {};
+    $log("Getting zodiac sign...");
+
+    const zod_sel = $('[data-test="link_zodiac"] .text-underline-always');
+    if (!zod_sel) return {};
+	const rawzod = $(zod_sel).text();
+	const zod_name = rawzod.split(" (")[0];
+
+	return { zodiac: zod_name };
+  }
+  
+  function getBirthplace() {
+    if (blacklist.includes("birthplace")) return {};
+    $log("Getting birthplace...");
+
+    const bcity_sel = $('[data-test="section-personal-information"] a[href*="placeOfBirth"]');
+	const bcity_name = bcity_sel.length ? $(bcity_sel).attr("href").split("=").slice(-1)[0] : null;
+	let bplace = "";
+	if (!bcity_name) {
+		$log("No birthplace found")
+		return {}
+	} else {
+		const bstate_sel = $('[data-test="section-personal-information"] a[href*="province"]');
+		const bstate_name = bstate_sel.length ? $(bstate_sel).attr("href").split("=").slice(-1)[0] : null;
+		if (!bstate_name) {
+			$log("No birth province found, just city!");
+			bplace = bcity_name;
+			return { birthplace: bplace };
+		} else {
+			bplace = bcity_name + ', ' + bstate_name.split("-")[0].trim();
+			return { birthplace: bplace };
+		}
+	}
   }
 
   function scrapeText(prop, selector) {
@@ -155,11 +191,11 @@ module.exports = async ({
 
   const custom = {
     ...scrapeText(
-      "hairColor",
+      "hair color",
       '[data-test="link_hair_color"] .text-underline-always'
     ),
     ...scrapeText(
-      "eyeColor",
+      "eye color",
       '[data-test="link_eye_color"] .text-underline-always'
     ),
     ...scrapeText(
@@ -168,6 +204,8 @@ module.exports = async ({
     ),
     ...getHeight(),
 	...getWeight(),
+	...getBirthplace(),
+	...getZodiac(),
   };
 
   const data = {

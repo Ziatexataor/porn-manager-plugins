@@ -1,8 +1,8 @@
 {
   "name": "freeones",
-  "version": "0.0.3",
+  "version": "0.4.0",
   "authors": ["boi123212321","john4valor"],
-  "description": "Scrape data from freeones.xxx",
+  "description": "Scrape data from freeones.xxx. Custom fields can only be named as follows (without "", not case sensitive): "Hair Color", "Eye Color", "Ethnicity", "Height", "Weight", "Birthplace", "Zodiac"",
   "arguments": [
     {
       "name": "dry",
@@ -16,7 +16,7 @@
       "type": "Array<String>",
       "required": false,
       "default": [],
-      "description": "Array of data fields to omit (possible values: 'aliases', 'height', 'weight', 'avatar', 'bornOn', 'labels', 'hairColor', 'eyeColor', 'ethnicity')"
+      "description": "Array of data fields to omit (possible values: 'zodiac', 'aliases', 'height', 'weight', 'avatar', 'bornOn', 'labels', 'hair color', 'eye color', 'ethnicity')"
     },
 	{
       "name": "useImperial",
