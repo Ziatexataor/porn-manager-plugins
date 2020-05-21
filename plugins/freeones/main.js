@@ -74,7 +74,7 @@ module.exports = async ({
 	if (!imp_pref) return { Height: hgt };
 	hgt *= 0.033;
 	hgt = Math.round((hgt + Number.EPSILON) * 100) / 100;
-	return { Height: hgt };
+	return { height: hgt };
   }
   
   function getWeight() {
@@ -91,7 +91,7 @@ module.exports = async ({
 	if (!imp_pref) return { Weight: wgt };
 	wgt *= 2.2;
 	wgt = Math.round((wgt + Number.EPSILON) * 100) / 100;
-	return { Weight: wgt };
+	return { weight: wgt };
   }
 
   function scrapeText(prop, selector) {

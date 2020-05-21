@@ -23,7 +23,7 @@
       "type": "String",
       "required": false,
       "default": [],
-      "description": "Use imperial for height and weight (possible values: 'true', 'false')"
+      "description": "Use imperial units for height and weight (possible values: 'true', 'false')"
     }
   ]
 }
