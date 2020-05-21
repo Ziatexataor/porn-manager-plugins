@@ -18,14 +18,14 @@ module.exports = async ({
   const blacklist = args.blacklist || [];
   if (!args.blacklist) $log("No blacklist defined, returning everything...");
   
-  //Check metric preference
-  const metricpref = args.prefer_metric;
-  if (!metricpref) {
-	  $log("Metric preference not set. Using imperial values...");
+  //Check imperial unit preference
+  const imp_pref = args.useImperial;
+  if (!imp_pref) {
+	  $log("Imperial preference not set. Using metric values...");
   } else {
-	  $log("Metric preference indicated. Using metric values...");
+	  $log("Imperial preference indicated. Using imperial values...");
   }
-
+  
   /* const petiteThreshold = parseInt(args.petiteThreshold) || 160; */
 
   const url = `https://freeones.xxx/${actorName.replace(/ /g, "-")}/profile`;
@@ -65,19 +65,16 @@ module.exports = async ({
     $log("Getting height...");
 
     const htsel = $('[data-test="link_height"] .text-underline-always');
-    if (!htsel || htsel.length === 0) return {};
+    if (!htsel) return {};
 
     const rawht = $(htsel).text();
     const ht_cm = rawht.match(/\d+cm/)[0];
-	if (!ht_cm) return {};
+    if (!ht_cm) return {};
 	let hgt = parseInt(ht_cm.replace("cm", ""));
-	if (!metricpref) {
-		hgt *= 0.033;
-		hgt = Math.round((hgt + Number.EPSILON) * 100) / 100;
-	}
-	
-	return { Height: hgt }
-	
+	if (!imp_pref) return { Height: hgt };
+	hgt *= 0.033;
+	hgt = Math.round((hgt + Number.EPSILON) * 100) / 100;
+	return { Height: hgt };
   }
   
   function getWeight() {
@@ -85,19 +82,16 @@ module.exports = async ({
     $log("Getting weight...");
 
     const wtsel = $('[data-test="link_weight"] .text-underline-always');
-    if (!wtsel || wtsel.length === 0) return {};
+    if (!wtsel) return {};
 
     const rawwt = $(wtsel).text();
     const wt_kg = rawwt.match(/\d+kg/)[0];
-	if (!wt_kg) return {};
+    if (!wt_kg) return {};
 	let wgt = parseInt(wt_kg.replace("kg", ""));
-	if (!metricpref) {
-		wgt *= 2.2;
-		wgt = Math.round((wgt + Number.EPSILON) * 100) / 100;
-	}
-	
-	return { Weight: wgt }
-	
+	if (!imp_pref) return { Weight: wgt };
+	wgt *= 2.2;
+	wgt = Math.round((wgt + Number.EPSILON) * 100) / 100;
+	return { Weight: wgt };
   }
 
   function scrapeText(prop, selector) {
@@ -179,8 +173,8 @@ module.exports = async ({
   const data = {
     ...getNationality(),
     ...getAge(),
-    ...(await getAvatar()),
 	...getAlias(),
+    ...(await getAvatar()),
     custom,
   };
 

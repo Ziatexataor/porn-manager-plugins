@@ -1,6 +1,6 @@
 {
   "name": "freeones",
-  "version": "0.3.0",
+  "version": "0.0.3",
   "authors": ["boi123212321","john4valor"],
   "description": "Scrape data from freeones.xxx",
   "arguments": [
@@ -19,11 +19,11 @@
       "description": "Array of data fields to omit (possible values: 'aliases', 'height', 'weight', 'avatar', 'bornOn', 'labels', 'hairColor', 'eyeColor', 'ethnicity')"
     },
 	{
-      "name": "prefer_metric",
+      "name": "useImperial",
       "type": "String",
       "required": false,
       "default": [],
-      "description": "Metric preference for height and weight (possible values: 'true', 'false')"
+      "description": "Use imperial for height and weight (possible values: 'true', 'false')"
     }
   ]
 }
