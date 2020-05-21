@@ -2,7 +2,7 @@
   "name": "freeones",
   "version": "0.4.0",
   "authors": ["boi123212321","john4valor"],
-  "description": "Scrape data from freeones.xxx. Custom fields can only be named as follows (without "", not case sensitive): "Hair Color", "Eye Color", "Ethnicity", "Height", "Weight", "Birthplace", "Zodiac"",
+  "description": "Scrape data from freeones.xxx. Custom fields can only be named as follows (not case sensitive): Hair Color, Eye Color, Ethnicity, Height, Weight, Birthplace, Zodiac",
   "arguments": [
     {
       "name": "dry",
